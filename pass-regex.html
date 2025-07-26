@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter your password"
+                oninput="checkRules()">
+        </div>
+        <ul class="list-unstyled">
+            <li id="lengthRule" class="invalid">❌ At least 8 characters</li>
+            <li id="capitalRule" class="invalid">❌ At least 1 capital letter</li>
+            <li id="specialRule" class="invalid">❌ At least 1 special character</li>
+            <li id="numberRule" class="invalid">❌ At least 1 number</li>
+        </ul>
+    </div>
+    <script>
+        function checkRules() {
+            const password = document.getElementById("password").value;
+
+            const isLongEnough = password.length >= 8;
+            const hasCapital = /[A-Z]/.test(password);
+            const hasSpecial = /[@#$&*]/.test(password);
+            const hasNumber = /\d/.test(password);
+
+            updateStatus('lengthRule', isLongEnough);
+            updateStatus('capitalRule', hasCapital);
+            updateStatus('specialRule', hasSpecial);
+            updateStatus('numberRule', hasNumber);
+        }
+
+        function updateStatus(id, condition) {
+            const element = document.getElementById(id);
+            if (condition) {
+                element.classList.remove('invalid');
+                element.classList.add('valid');
+                element.textContent = "✅ " + element.textContent.slice(2);
+            } else {
+                element.classList.remove('valid');
+                element.classList.add('invalid');
+                element.textContent = "❌ " + element.textContent.slice(2);
+            }
+        }
+    </script>
+</body>
+
+</html>

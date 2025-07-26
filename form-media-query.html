@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap'); */
+        /* @import url('https://fonts.googleapis.com/css2?family=Manufacturing+Consent&display=swap'); */
+        body {
+            font-family: Arial, sans-serif;
+            /* font-family: 'Cardo', serif; */
+            /* font-family: 'Manufacturing Consent', sans-serif; */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+
+            padding: 20px;
+        }
+
+        h4 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button[type="reset"] {
+            background-color: gray;
+            color: white;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 1336px) {
+            .container {
+                max-width: 90%;
+                margin: 30px auto;
+            }
+
+            h4 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 85%;
+                margin: 20px auto;
+            }
+
+            h4 {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                max-width: 80%;
+                margin: 15px auto;
+            }
+
+            h4 {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            input[type="text"],
+            input[type="number"] {
+                padding: 8px;
+                font-size: 14px;
+                border-radius: 6px;
+
+                .container {
+                    max-width: 100%;
+                    margin: 10px auto;
+                    padding: 15px;
+                }
+
+                h4 {
+                    font-size: 14px;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h4>User Information Form</h4>
+        <form onsubmit="return validateForm()">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name"
+                    onkeypress="return /[a-zA-Z]/.test(event.key)">
+            </div>
+
+            <div>
+                <label for="age">Age</label>
+                <input type="number" id="age" placeholder="Enter your age" onkeypress="return /[0-9]/.test(event.key)"
+                    oninput="this.value = this.value.slice(0, 3)">
+            </div>
+
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+
+            if (name.length < 3) {
+                alert("Name must be at least 3 characters long.");
+                return false;
+            }
+
+            if (age < 12 || age > 99) {
+                alert("Age must be a number between 12 and 99.");
+                return false;
+            }
+
+            else {
+                alert("Form submitted successfully");
+            }
+            return true;
+        }
+    </script> 
+</body>
