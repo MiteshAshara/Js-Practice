@@ -91,8 +91,77 @@
 
 
 // Make a Multiple inputs(Dropdown,Checkbox,Radio) and Add Details via in JSON File.
+    /* <label for="country">Country:</label>
+    <select id="country">
+        <option value="USA">USA</option>
+        <option value="India">India</option>
+        <option value="UK">UK</option>
+    </select>
+    <br><br>
+
+    <label>Skills:</label><br>
+    <input type="checkbox" name="skills" value="JavaScript"> JavaScript<br>
+    <input type="checkbox" name="skills" value="Python"> Python<br>
+    <input type="checkbox" name="skills" value="HTML"> HTML<br><br>
+
+    <label>Gender:</label><br>
+    <input type="radio" name="gender" value="Male"> Male<br>
+    <input type="radio" name="gender" value="Female"> Female<br><br>
+    <button onclick="collectData()">Add Details</button>
+
+    <h3>JSON Output:</h3>
+    <pre id="output"></pre>
+
+    <script>
+        function collectData() {
+            const country = document.getElementById("country").value;
+
+            const skillNodes = document.querySelectorAll("input[name='skills']:checked");
+
+            const skills = Array.from(skillNodes).map(cb => cb.value);
+
+            const genderNode = document.querySelector("input[name='gender']:checked");
+
+            const gender = genderNode ? genderNode.value : null;
+            
+            const userDetails = {
+                country: country,
+                skills: skills,
+                gender: gender
+            };
+            document.getElementById("output").textContent = JSON.stringify(userDetails, null, 2);
+        }
+    </script> */
     
 // Add Radio Button and make one Radio BUtton Disable While click on button, and same do enable that radiobutton. and put submit button to get details what we want.
+/* <h2>Choose Gender</h2>
+
+    <input type="radio" name="gender" value="Male" id="male"> Male<br>
+    <input type="radio" name="gender" value="Female" id="female"> Female<br><br>
+
+    <button onclick="toggleFemale()">Disable/Enable 'Female'</button><br><br>
+    <button onclick="submitData()">Submit</button>
+
+    <h3>Output (JSON):</h3>
+    <pre id="output"></pre>
+
+    <script>
+        function toggleFemale() {
+            const femaleRadio = document.getElementById("female");
+            femaleRadio.disabled = !femaleRadio.disabled;
+        }
+
+        function submitData() {
+            const genderNode = document.querySelector("input[name='gender']:checked");
+            const gender = genderNode ? genderNode.value : null;
+
+            const data = {
+                gender: gender
+            };
+
+            document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+        }
+    </script> */
 
 // Find a Diffrence Between 2 array with deatils like capital and small latter find with the use of includes() Method in js.
 // const array1 = ['A', 'B', 'C', 'D'];
@@ -102,9 +171,97 @@
 
 
 // find all function use in website any site per page
+//  Right-click the page → Inspect->source->ctrl+p open file search->functions
+
 // write js display global and block scope varibale in chrome
+// var globalVar = 'I am global';
+// let blockVar = 'I am block scoped';
+// const blockConst = 'I am also block scoped';
+
+// {
+//   let innerBlock = 'inside block';
+//   console.log('Block Scope Variables:');
+//   console.log({ blockVar, blockConst, innerBlock });
+// }
+
+// console.log('Global Scope Variables:');
+// console.log({ globalVar });
+
 // write js without console on browser
 // how to debug website forntend
 // make table 10 row even row make bg gray others white
-// display if name is length 2,4 display capital word
+ /* <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px;
+        }
 
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f0f0f0;
+        }
+
+</style> 
+    
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Row 1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Row 2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Row 3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Row 4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Row 5</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Row 6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Row 7</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Row 8</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Row 9</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Row 10</td>
+        </tr>
+    </table> */
+
+
+// display if name is length is 2 or 4 make first latter capital if 3 do not implement 
+// const names = ['jo', 'john', 'doe', 'mary', 'paul','ACP']
+// names.forEach(name => {
+//   if (name.length === 2 || name.length === 4) {
+//     console.log(name.charAt(0).toUpperCase() + name.slice(1))
+//   }
+// })
