@@ -258,10 +258,11 @@
     </table> */
 
 
-// display if name is length is 2 or 4 make first latter capital if 3 do not implement 
+// display if name is length is 2 or 4 make first latter capital if 3 do not implement
 // const names = ['jo', 'john', 'doe', 'mary', 'paul','ACP']
 // names.forEach(name => {
 //   if (name.length === 2 || name.length === 4) {
 //     console.log(name.charAt(0).toUpperCase() + name.slice(1))
 //   }
 // })
+

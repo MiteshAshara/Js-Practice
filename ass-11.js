@@ -131,7 +131,9 @@ console.log("Divide:", calculator(5, 3, divide)); // 1.6666666666666667 */
         // const arrayWithDuplicates = [1, 2, 2,3, 3, 4, 4, 5,7,7,7];
         // const uniqueArray = [...new Set(arrayWithDuplicates)];
         // console.log("Unique Array With In built Methods:", uniqueArray);
+        
         // ------- Without inbuilt methods -------
+        
         // const arrayWithDuplicates = [1, 2, 2,3, 3, 4, 4, 5,7,7,7];
         // const uniqueArray = [];
         // for (let i = 0; i < arrayWithDuplicates.length; i++) {
@@ -166,6 +168,14 @@ console.log("Divide:", calculator(5, 3, divide)); // 1.6666666666666667 */
         // a = a - b;
         // console.log("After Swapping: a =", a, ", b =", b);
 
+
+
+
+
+
+
+
+
         // Debounce function
         // function debounce(func, delay) {
         //     let timeoutId
@@ -178,7 +188,7 @@ console.log("Divide:", calculator(5, 3, divide)); // 1.6666666666666667 */
         //     console.log("Input triggered!")
         // }
 
-        // const debouncedInput = debounce(handleInput, 500)
+        // const debouncedInput = debounce(handleInput, 3000) // 3 sec
         // debouncedInput() 
 
         // Write a Program Check if an object is Empty.
@@ -284,11 +294,11 @@ console.log("Divide:", calculator(5, 3, divide)); // 1.6666666666666667 */
         // Find The Intersection of Two Arrays ex. [[1,2,3],[2,3,4]] / O.P [2,3].
         // const arr1 = [1, 2, 3];
         // const arr2 = [2, 3, 4];
-        // const intersection = arr1.filter(value => arr2.includes(value));
-        // console.log(intersection); // Output: [2, 3]
+        // const result = arr1.filter(value => arr2.includes(value));
+        // console.log(result); // Output: [2, 3]
 
         // Find a Group of Elements by Frequancy (Write Your Own FullName)Find all pair in an Array that sum to a Target Numbers ex. [-1,2,3,3,4,7] / O.P  [[2,4],[3,3],[7,-1]] ...
-        // let name = "meet ashara";
+        // let name = "hey-meet";
         // let frequency = {};
         // for (let char of name) {
         //     frequency[char] = (frequency[char] || 0) + 1;
@@ -307,3 +317,125 @@ console.log("Divide:", calculator(5, 3, divide)); // 1.6666666666666667 */
         //     }
         // }
         // console.log(result)
+
+// Sort an Array of Numbers in Ascending and Descending Order
+// const arr = [101,201,1,2]
+// var result1 = arr.sort((a, b) => a - b); //ascending order
+// var result = arr.sort((a, b) => b - a); //descending order
+// console.log(result1); // Output: [201, 101, 2, 1]
+// console.log(result); // Output: [1, 2, 101, 201]
+
+// console.log(5 && 1); // Output: 1
+// console.log(5 || 1); // Output: 5
+// console.log(5 ?? 0); // Output: 5
+
+// if([]) {
+//     console.log("True");
+// }
+// else {
+//     console.log("False");
+// }
+
+// if([] == true) {
+//     console.log(" * ");
+// }
+// else {
+//     console.log("------");
+// }
+
+// ----------------------------------------------------
+// defer
+/* <script src="script.js" defer></script>
+  <script>
+        console.log("JavaScript loaded after HTML is parsed");
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOM fully loaded");
+        });
+    </script> */
+    
+//redirect 
+/* <script>
+        setTimeout(function () {
+            window.location.href = "https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_script_defer";
+        }, 2000);
+    </script> */
+    
+    
+    
+// I want to get result in sync like p1, p2 and p3
+// function showMessage(message, time) {
+//   return new Promise((done) => {
+//     setTimeout(() => {
+//       console.log(message);
+//       done();
+//     }, time);
+//   });
+// }
+
+// async function runMessages() {
+//   await showMessage("Hello World 1", 3000); // Wait 3 sec
+//   await showMessage("Hello World 2", 1000); // Wait 1 sec
+//   await showMessage("Hello World 3", 2000); // Wait 2 sec
+// }
+
+// runMessages();
+
+// abc = [1,2,3,4]; 
+// xyz = abc; 
+// xyz[3] = 6; 
+// console.log(xyz) 
+// console.log(abc)
+// [1, 2, 3, 6]
+// [1, 2, 3, 6]
+
+// const array = [1,2,3,4,5,6,7,8,9,10] 
+// o/p: [[1,2,3],[4,5,6],[7,8,9],[10]]
+
+// const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const chunkSize = 3;
+// const result = [];
+// for (let i = 0; i < array.length; i += chunkSize) {
+//   result.push(array.slice(i, i + chunkSize));
+// }
+// console.log(result);
+
+
+// const array = [1,2,[3,4,[5],6],7] 
+// o/p: [1,2,3,4,5,6,7]
+// const array = [1, 2, [3, 4, [5], 6], 7];
+// console.log(array.flat(Infinity));
+
+// const obj = {
+//   a: "foo",
+//   b: function () {
+//     console.log(this.a);
+//   },
+// };
+// const c = obj.b;
+// obj.b(); //foo
+// c(); //undefined
+ 
+// i/p - Reverse a string - Hello How are you - 
+// o/p - ollew woh era uoy
+// let a = "Hello How are you"
+// let reverse = a.split(" ").map(word => word.split("").reverse().join("")).join(" ")
+// console.log(reverse); // Output: "olleH woH era uoy"
+
+
+//featch example 
+ /* <pre id="jsonOutput">Loading...</pre>
+
+    <script>
+        const url = "https://api.restful-api.dev/objects";
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const output = document.getElementById("jsonOutput");
+                output.textContent = JSON.stringify(data, null, 2); 
+            })
+            .catch(error => {
+                document.getElementById("jsonOutput").textContent = "Error: " + error;
+            });
+    </script> */
+    
