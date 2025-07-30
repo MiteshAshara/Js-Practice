@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        div>div {
+            height: 50px;
+            margin: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="height: 300px;">
+        <div style="height: 17%;background-color: aliceblue;">1</div>
+        <div style="height: 17%;background-color: aliceblue;">2</div>
+        <div style="height: 17%;background-color: aliceblue;" class="test">3</div>
+        <div style="height: 17%;background-color: aliceblue;">4</div>
+        <div style="height: 17%;background-color: aliceblue;">5</div>
+    </div>
+     <script>
+            $(document).ready(function () {
+                $("body").click((e) => {
+                    if(e.target.className){
+                        $("body > div > div:nth-child(3)").removeClass('test').addClass('test1').css("background-color","black")
+                        console.log(e.target.className,"is clicked")
+                        
+                    }else {
+                        console.log(`div ${e.target.innerHTML}is clicked`)
+                         $("body > div > div:nth-child(3)").removeClass('test1').addClass('test').css("background-color","aliceblue")
+                    }
+                }
+                )
+            })
+        </script>
+</body>
+
+</html>

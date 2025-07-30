@@ -439,3 +439,10 @@ console.log("Divide:", calculator(5, 3, divide)); // 1.6666666666666667 */
             });
     </script> */
     
+// const a = { valueOf: () => 2 };
+// console.log(a == 2) //true
+// console.log(a + 2) // 4
+// console.log(a > 2) //false
+
+// const abc = () => { }
+// console.log(abc)
