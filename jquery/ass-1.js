@@ -1,3 +1,5 @@
+// ==================30/7/2025==================
+
 // Hide a Paragraph Using jQuery
 /* <p id="myParagraph">This is a paragraph that will be hidden using jQuery.</p>
     <button id="hideBtn">Click Me</button>
