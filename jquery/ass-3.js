@@ -41,7 +41,6 @@
 </script> */
 
 /*<div id="toRemove">Delete me</div>
-
 <script>
   $('#toRemove').remove();
 </script> */
@@ -58,16 +57,21 @@
   $('body').append(copy);
 </script> */
 
-/*<div id="box">Styled Box</div>
-<script>
-  $('#box').css('color', 'blue'); // Set text color
-  let color = $('#box').css('color'); // Get color
-</script> */
+/* <div id="box">Styled Box</div>
+    <script>
+        $('#box').css('background-color', 'gray'); // Set background color
+        // add multiple CSS properties
+        $('#box').css({
+            'font-weight': 'bold',
+            'color': 'white',
+            padding: '10px',
+        });
+    </script> */
 
 // jQuery Wrap and UnWrap Elements
-/*<style>
+/* <style>
         .wrapper {
-            border: 2px solid blue;
+            border: 2px solid gray;
             padding: 10px;
             margin: 10px;
         }
@@ -75,29 +79,38 @@
         p {
             padding: 5px;
         }
-    </style> 
+    </style>
 
-    
-        <p>This is paragraph 1.</p>
-        <p>This is paragraph 2.</p>
 
-        <button id="wrapButton">Wrap Paragraphs</button>
+    <p>This is paragraph 1</p>
+    <p>This is paragraph 2</p>
 
-        <script>
-            $(document).ready(function () {
-                $("#wrapButton").click(function () {
-                    $("p").wrap("<div class='wrapper'></div>");
-                });
+    <button id="wrapButton">Wrap Paragraphs</button>
+    <button id="unwrapButton">Unwrap Paragraphs</button>
+
+    <script>
+        $(document).ready(function () {
+            $("#wrapButton").click(function () {
+                $("p").wrap("<div class='wrapper'></div>");
             });
-        </script> */
+
+            $("#unwrapButton").click(function () {
+                $(".wrapper").children().unwrap();
+            });
+        });
+    </script> */
 
 // jQuery Append and Prepend Elements
-/*<p>This is a paragraph.</p>
+/* <p>This is a paragraph.</p>
     <button id="appendButton">Append Text</button>
+    <button id="prependButton">Prepend Text</button>
     <script>
-        $(document).ready(function() {
-            $('#appendButton').click(function() {
+        $(document).ready(function () {
+            $('#appendButton').click(function () {
                 $('p').append(' Appended text using jQuery.');
+            });
+            $('#prependButton').click(function () {
+                $('p').prepend('Prepended text using jQuery. ');
             });
         });
     </script> */
@@ -118,7 +131,14 @@
     </script> */
     
 // jQuery Add, Remove and Toggle class
- /* <div id="box">This is a box</div>
+ /*  <style>
+        .highlight {
+            background-color: gray;
+            font-weight: bold;
+        }
+    </style>
+    
+    <div id="box">This is a box</div>
     <button id="add">Add Class</button>
     <button id="remove">Remove Class</button>
     <button id="toggle">Toggle Class</button>
