@@ -19,41 +19,29 @@
 
         function debounce(fn, delay) {
             let timer;
-            return function (...args) {
+            return (...args) => {
                 clearTimeout(timer);
-                timer = setTimeout(() => fn.apply(this, args), delay);
+                timer = setTimeout(() => fn(...args), delay);
             };
         }
 
         async function fetchWeather(cityName) {
-            if (!cityName) return resultDiv.innerHTML = '';
+            if (!cityName) return (resultDiv.innerHTML = '');
             try {
                 const response = await fetch(
                     `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`
                 );
                 const data = await response.json();
-                if (data.cod === 200) {
-                    const temp = data.main.temp;
-                    const desc = data.weather[0].description;
-                    resultDiv.innerHTML = `
-            <strong>${data.name}</strong><br>
-             Temp: ${temp}°C<br>
-             Condition: ${desc}
-          `;
-                } else {
-                    resultDiv.innerHTML = `<span style="color:red;">${data.message}</span>`;
-                }
-            } catch (err) {
+                resultDiv.innerHTML =
+                    data.cod === 200
+                        ? `<strong>${data.name}</strong><br>Temp: ${data.main.temp}°C<br>Condition: ${data.weather[0].description}`
+                        : `<span style="color:red;">${data.message}</span>`;
+            } catch {
                 resultDiv.innerHTML = `<span style="color:red;">Error fetching data</span>`;
             }
         }
 
-        const debouncedSearch = debounce(() => {
-            const city = searchBox.value.trim();
-            fetchWeather(city);
-        }, 600);
-
-        searchBox.addEventListener('input', debouncedSearch);
+        searchBox.addEventListener('input', debounce(() => fetchWeather(searchBox.value.trim()), 600));
     </script>
 
 </body>
