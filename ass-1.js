@@ -158,7 +158,7 @@ console.log("Here Const Example is : " + z); */
 //     j++
 // } while (j <= 5);
 
-//write a prgram to print number is odd or even.us8e % and if condition
+//write a prgram to print number is odd or even.use % and if condition
 // let number = 10;
 // if(number % 2 == 0) {
 //     console.log("Number is Even");
@@ -166,6 +166,16 @@ console.log("Here Const Example is : " + z); */
 // else {
 //     console.log("Number is Odd");
 // }
+
+//write a program for check number is Palindrome or not
+// first reverse after it will same output
+// function palindromeCheck(num) {
+//     let numStr = num.toString();
+//     let result = numStr.split('').reverse().join('');
+//     return numStr === result;
+// }
+// console.log(palindromeCheck(121)); // true
+// console.log(palindromeCheck(123)); // false
 
 // write a program to print number is prime or not
 // let num = 30;
@@ -210,7 +220,7 @@ console.log("Here Const Example is : " + z); */
 // 1
 // 23
 // 456
-
+// 78910
 
 // let num = 1
 // for (let i = 1; i <= 4; i++){
@@ -250,9 +260,15 @@ console.log("Here Const Example is : " + z); */
 // for (let i = 0; i < row; i++){
 //    let line = "";
 //    let space = ""
-//    for (let k = 0; k < row - i ; k++){
+//    for (let k = 0; k < i ; k++){
 //       space += " ";
 //    }
+
+//    for (let j = 1; j <= row - i; j++){
+//       line +=  "*";
+//    }
+//    console.log(space + line);
+// }
 
 // let row=3
 // for (let i = 1; i <=row ; i++) {
@@ -352,8 +368,8 @@ console.log("Here Const Example is : " + z); */
 // let currentDate = new Date();
 // let currentTime = currentDate.toLocaleTimeString();
 // console.log("Current Time: " + currentTime);
-// let randomNumber = Math.floor(Math.random() * 100) + 1;
-// console.log("Random Number: " + randomNumber);
+let randomNumber = Math.floor(Math.random() * 100) + 1;
+console.log("Random Number: " + randomNumber);
 
 
 // let room = {

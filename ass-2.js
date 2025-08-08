@@ -1,9 +1,8 @@
 //gives number check number odd,even without conditon without %
 // function check(number)
 // {
-//     return(number & 1) ===1 ? "odd" : "Even"
+//     return(number & 1) === 1 ? "odd" : "Even"
 // }
-
 // console.log(check(7));
 
 // let num = 5;
@@ -14,17 +13,17 @@
 //    name: "meet",
 //    age: "28"
 // }
-// let jsonStr = JSON.stringify(number)
+// let jsonStr = JSON.stringify(number) //JSON string
 // console.log(jsonStr)
 
-// let json1 = JSON.parse(jsonStr)
+// let json1 = JSON.parse(jsonStr) // JSON object
 // console.log(json1)
 
 // create an array buffer of 8 bytes abd let the first 4 bytes as a 32 bit int value 100.then read and print it
 // const buffer = new ArrayBuffer(8)
 // const view = new DataView(buffer)
-// view.setInt32(100)
-// console.log(view.setInt32)
+// view.setInt32(0, 100)
+// console.log(view.getInt32(0))
 
 // let student = {
 //     name: "alice",

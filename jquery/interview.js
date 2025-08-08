@@ -63,3 +63,53 @@
 // }, {})
 // console.log(maxRepeated)
 
+//make pair of each 3 print its maxium total
+// const pair = [5, 3, 5, 2, 4, 6, 2, 5, 0]
+
+// let maxTotal = -Infinity;
+// let maxGroup = [];
+
+// for (let i = 0; i <= pair.length - 3; i++) {
+//   const group = pair.slice(i, i + 3);
+//   const total = group.reduce((a, b) => a + b, 0);
+  
+//   if (total > maxTotal) {
+//     maxTotal = total;
+//     maxGroup = group;
+//   }
+// }
+
+// console.log("Maximum sum:", maxTotal);
+// console.log("From group:", maxGroup);
+
+// const highestRepeatedChar = (str) => {
+//     const charCount = {};
+//     for (let char of str) {
+//         charCount[char] = (charCount[char] || 0) + 1;
+//     }
+//     return Object.keys(charCount).reduce((a, b) => charCount[a] > charCount[b] ? a : b);
+// }
+// console.log(highestRepeatedChar(name));
+
+// find heighest time repated character simplest way less to less code interview also how many times if bo repate display empty
+// const highestRepeatedChar = s => {
+//   const m = {}; for (c of s) m[c] = (m[c]||0)+1;
+//   const e = Object.entries(m).reduce((a,b)=>b[1]>a[1]?b:a);
+//   return e[1] > 1 ? {char:e[0], count:e[1]} : {};
+// };
+// console.log(highestRepeatedChar("Hey Meet")); // { char: 'e', count: 2 }
+
+// class Person1{
+//     constructor(name) {
+//         this.name = name;
+//     }
+//     fn()
+//     {
+//         console.log("Hardik");
+        
+//     }
+// }
+// const person = new Person1("Hardik1");
+// // const copyfn = person.fn //Hardik
+// const copyfn = person.fn.bind(person) //Hardik
+// copyfn(); 

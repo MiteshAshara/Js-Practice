@@ -85,7 +85,7 @@
 // Combined Mini Form App
 // Concepts: Exception Handling, Promises, Date comparison, this, alert, eval, closest(), Debugging
 
-/*    <form id="form">
+/*  <form id="form">
         <input type="date" id="dob" required><br><br>
         <input type="text" id="exp" placeholder="e.g. 5+3" required><br><br>
         <button>Submit</button>

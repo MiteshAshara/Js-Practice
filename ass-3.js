@@ -1,5 +1,6 @@
 // JavaScript Reflect
-// Reflect gives you clean, consistent, and functional ways to perform object operations like get, set, delete, and check — without using direct syntax. It's especially useful in meta-programming or when working with proxies
+// Reflect gives you clean, consistent, and functional ways to perform object operations like get, set, delete, and check — 
+// without using direct syntax.It's especially useful in meta-programming or when working with proxies
 
 // var details = {
 //     name : "meet",
@@ -96,8 +97,8 @@ window.addEventListener('offline', updateStatus); */
 
 // Que 8
 
-// console.log(alert(screen.width));  //height
-// console.log(alert(screen.height)); // width
+// console.log(alert(screen.width));  // width
+// console.log(alert(screen.height)); // height
 
 // console.log(navigator.userAgent);  // user agent
 
