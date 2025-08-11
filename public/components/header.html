@@ -1,0 +1,64 @@
+<!-- Header Start -->
+<header class="entire_header">
+    <div class="announcement-bar d-flex justify-content-between align-items-center px-3 py-2 position-relative row">
+        <div class="w-100 text-center col-9">
+            Summer Sale For All Swim Suits And Free Express Delivery – OFF 50%! <a href="#"
+                class="text-white text-decoration-underline">ShopNow</a>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="/">Exclusive</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link fw-bold" href="/dashbaord.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+                </ul>
+                <form id="searchForm" class="d-flex align-items-center bg-light rounded-3 p-2 ms-lg-3 my-2 my-lg-0"
+                    style="width:280px;">
+                    <input id="searchInput" class="form-control border-0 bg-light" type="search"
+                        placeholder="What are you looking for?" aria-label="Search"
+                        style="box-shadow:none; font-size:1rem;">
+                    <button class="btn btn-link p-0 ms-2" type="submit" style="font-size:1.2rem; color:#222;">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+                <div class="d-flex align-items-center ms-lg-3 mt-2 mt-lg-0">
+                    <a href="/wishlist.html" class="btn btn-link text-dark fs-4 me-2 position-relative" title="Wishlist"
+                        id="wishlist-link">
+                        <i class="fa fa-heart"></i>
+                        <span id="wishlist-count" class="position-absolute top-0 start-100 translate-middle "
+                            style="font-size:0.75rem; min-width:28px; background-color: red;color:white;border-radius:6px;">
+                        </span>
+                    </a>
+                    <a href="/cart.html" class="btn btn-link text-dark fs-4" title="Cart">
+                        <i class="fa fa-shopping-cart"></i>
+                    </a>
+                     <a href="#" class="btn btn-link text-dark fs-4" title="User">
+                        <i class="fa fa-user"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function updateWishlistCount() {
+            var wishlist = JSON.parse(localStorage.getItem('wishlist'));
+            document.getElementById('wishlist-count').textContent = wishlist.length;
+        }
+        updateWishlistCount();
+        window.addEventListener('storage', function (e) {
+            if (e.key === 'wishlist') updateWishlistCount();
+        });
+    });
+
+</script>
+<!-- Header End -->

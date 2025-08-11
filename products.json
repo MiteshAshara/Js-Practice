@@ -1,0 +1,72 @@
+[
+  {
+    "id":1,
+    "name": "Breed Dry Dog Food",
+    "image": "./public/assets/images/Frame 604.png",
+    "price": 100,
+    "rating": 3,
+    "reviews": 35
+  },
+  {
+    "id":2,
+    "name": "CANON EOS DSLR Camera",
+    "image": "./public/assets/images/Frame 604 (1).png",
+    "price": 360,
+    "rating": 4,
+    "reviews": 95
+  },
+  {
+    "id":3,
+    "name": "ASUS FHD Gaming Laptop",
+    "image": "./public/assets/images/Frame 604 (2).png",
+    "price": 700,
+    "rating": 5,
+    "reviews": 325
+  },
+  {
+    "id":4,
+    "name": "Curology Product Set",
+    "image": "./public/assets/images/curology-j7pKVQrTUsM-unsplash 1.png",
+    "price": 500,
+    "rating": 4,
+    "reviews": 145
+  },
+  {
+    "id":5,
+    "name": "Kids Electric Car",
+    "image": "./public/assets/images/New-Mercedes-Benz-Gtr-Licensed-Ride-on-Car-Kids-Electric-Toy-Car 1.png",
+    "price": 960,
+    "rating": 5,
+    "reviews": 65,
+    "isNew": true,
+    "colors": ["#FB1314", "#DB4444"]
+  },
+  {
+    "id":6,
+    "name": "Jr.Zoom Soccer Cleats",
+    "image": "./public/assets/images/Frame 608.png",
+    "price": 1160,
+    "rating": 5,
+    "reviews": 35,
+    "colors": ["#EEFF61", "#DB4444"]
+  },
+  {
+    "id":7,
+    "name": "GP11 Shooter USB Gamepad",
+    "image": "./public/assets/images/Frame 608 (1).png",
+    "price": 660,
+    "rating": 4.5,
+    "reviews": 55,
+    "isNew": true,
+    "colors": ["#000000", "#DB4444"]
+  },
+  {
+    "id":8,
+    "name": "Quilted Satin Jacket",
+    "image": "./public/assets/images/698717_Z8A1X_3475_001_100_0000_Light-Reversible-quilted-satin-jacket 1.png",
+    "price": 660,
+    "rating": 4.5,
+    "reviews": 55,
+    "colors": ["#184A48", "#DB4444"]
+  }
+]

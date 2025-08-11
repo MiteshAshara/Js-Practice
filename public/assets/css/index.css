@@ -1,0 +1,45 @@
+.announcement-bar {
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+}
+.footer {
+  background: #111;
+  color: #fff;
+}
+.footer-bottom {
+  border-top: 1px solid #222;
+  color: #aaa;
+}
+.footer .footer-link {
+  color: #fff;
+  text-decoration: none;
+}
+.footer .footer-link:hover {
+  text-decoration: underline;
+}
+.card:hover .card-action-hover {
+    opacity: 10 !important;
+}
+.product-card-hover .card-action-hover,
+.product-card-hover .add-to-cart-btn {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+.product-card-hover:hover .card-action-hover,
+.product-card-hover:hover .add-to-cart-btn {
+    opacity: 1 !important;
+    pointer-events: auto;
+}
+.product-card-hover .add-to-cart-btn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    font-size: 1rem;
+}
+.card-body {
+    min-height: 150px;
+}
