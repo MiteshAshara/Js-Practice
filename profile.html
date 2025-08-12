@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusive E-commerce</title>
+    <link rel="icon" type="image/x-icon" href="./public/assets/images/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="./public/assets/css/index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <main class="main_details">
+        <section class="mt-5 mb-4">
+            <div class="container" id="profile-details">
+                <nav aria-label="breadcrumb" class="d-flex justify-content-between align-items-center">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a class="text-decoration-none text-secondary" href="/">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active text-dark" aria-current="page">Profile</li>
+                    </ol>
+                    <span id="welcome-username" class="fw-bold text-secondary">Welcome! <span class="text-danger">(User)</span></span>
+                </nav>
+                <div class="container">
+                    <div class="row mt-5 mb-5">
+                        <div class="col-3">
+                            <div>
+                                <h6 class="fw-bold">Manage My Account</h6>
+                                <ul class="list-unstyled ms-5">
+                                    <li class="text-danger">My Profile</li>
+                                    <li class="text-muted">Address Book</li>
+                                    <li class="text-muted">My Payment Options</li>
+                                </ul>
+
+                                <h6 class="fw-bold mt-3">My Orders</h6>
+                                <ul class="list-unstyled ms-5">
+                                    <li class="text-muted">My Returns</li>
+                                    <li class="text-muted">My Cancellations</li>
+                                </ul>
+
+                                <h6 class="fw-bold mt-3">My WishList</h6>
+                            </div>
+                        </div>
+
+                        <div class="col-7 p-4 bg-white shadow-sm rounded">
+                            <h5 class="text-danger mb-4">Edit Your Profile</h5>
+                            <form>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-control bg-light" />
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-control bg-light" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control bg-light" />
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Address</label>
+                                        <input type="text" class="form-control bg-light" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">Country</label>
+                                        <input type="text" class="form-control bg-light" />
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">State</label>
+                                        <input type="text" class="form-control bg-light" />
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">City</label>
+                                        <input type="text" class="form-control bg-light" />
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label d-block">Gender</label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="male"
+                                            value="Male" checked />
+                                        <label class="form-check-label" for="male" >Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="female"
+                                            value="Female" />
+                                        <label class="form-check-label" for="female">Female</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label d-block">Interests</label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="gaming" value="Gaming" />
+                                        <label class="form-check-label" for="gaming">Gaming</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="mobile" value="Mobile" />
+                                        <label class="form-check-label" for="mobile">Mobile</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="laptop" value="Laptop" />
+                                        <label class="form-check-label" for="laptop">Laptop</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Mobile Number</label>
+                                    <input type="text" class="form-control bg-light" placeholder="" />
+                                </div>
+                                <div class="mb-2 fw-bold">Password Changes</div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control bg-light" placeholder="Current Password" />
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control bg-light" placeholder="New Password" />
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control bg-light" placeholder="Confirm New Password" />
+                                </div>
+                                <div class="d-flex justify-content-end align-items-center mt-4">
+                                    <button type="button" class="btn btn-link text-dark me-3 text-decoration-none">
+                                        Cancel
+                                    </button>
+                                    <button type="submit" class="btn btn-danger w-25 py-2 p-3">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </main>
+    <div id="footer"></div>
+
+    <script>
+        fetch('./public/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+
+        fetch('./public/components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
+</body>
+
+</html>

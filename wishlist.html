@@ -36,50 +36,48 @@
             });
 
         document.addEventListener('DOMContentLoaded', function () {
-            const wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
             const wishlistContainer = document.getElementById('wishlist-items');
 
-            if (wishlistItems.length === 0) {
+            function renderWishlist() {
+                const wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+                if (wishlistItems.length === 0) {
+                    wishlistContainer.innerHTML = `
+                <p class="text-center">Your wishlist is empty <a class="text-dark text-decoration-none" href="./dashbaord.html">Continue shopping</a></p>
+            `;
+                    return;
+                }
                 wishlistContainer.innerHTML = `
-                    <p class="text-center">Your wishlist is empty <a class="text-dark text-decoration-none" href="./dashbaord.html">Continue shopping</a></p>
-                `;
-                return;
-            }
-
-            wishlistContainer.innerHTML = `
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-                    ${wishlistItems.map(item => `
-                        <div class="col">
-                            <div class="card border-0 position-relative h-100">
-                                <img src="${item.image || './public/assets/images/default-product.png'}" class="card-img-top p-5 bg-light"
-                                    style="height:240px; object-fit:contain;" alt="${item.name}">
-                                <div class="card-body pt-2 px-2 d-flex flex-column align-items-start">
-                                    <div class="fw-bold mb-1" style="font-size:1.05rem;">${item.name}</div>
-                                    <div class="text-danger fw-bold mb-2" style="font-size:1.05rem;">$${item.price}</div>
-                                    <button class="btn btn-outline-danger btn-sm remove-wishlist-item" data-id="${item.id}">
-                                        Remove
-                                    </button>
-                                </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+                ${wishlistItems.map(item => `
+                    <div class="col">
+                        <div class="card border-0 position-relative h-100">
+                            <img src="${item.image || './public/assets/images/default-product.png'}" class="card-img-top p-5 bg-light"
+                                style="height:240px; object-fit:contain;" alt="${item.name}">
+                            <div class="card-body pt-2 px-2 d-flex flex-column align-items-start">
+                                <div class="fw-bold mb-1" style="font-size:1.05rem;">${item.name}</div>
+                                <div class="text-danger fw-bold mb-2" style="font-size:1.05rem;">$${item.price}</div>
+                                <button class="btn btn-outline-danger btn-sm remove-wishlist-item" data-id="${item.id}">
+                                    Remove
+                                </button>
                             </div>
                         </div>
-                    `).join('')}
-                </div>
-            `;
+                    </div>
+                `).join('')}
+            </div>`
+            }
+            renderWishlist();
 
             wishlistContainer.addEventListener('click', function (event) {
                 if (event.target.classList.contains('remove-wishlist-item')) {
                     const id = event.target.getAttribute('data-id');
-                    const updatedWishlist = wishlistItems.filter(item => item.id !== id);
-                    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
-                    event.target.closest('.col').remove();
-                    if (updatedWishlist.length === 0) {
-                        wishlistContainer.innerHTML = `
-                            <p class="text-center">Your wishlist is empty. <a href="index.html">Continue shopping</a></p>
-                        `;
-                    }
+                    let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+                    wishlistItems = wishlistItems.filter(item => String(item.id) !== String(id));
+                    localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+                    renderWishlist();
                 }
             });
         });
     </script>
 </body>
+
 </html>

@@ -63,6 +63,43 @@
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
             });
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("loginForm");
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const username = document.getElementById("username").value.trim();
+                const password = document.getElementById("password").value.trim();
+
+                if (!username || !password) {
+                    alert("Please enter both username and password.");
+                    return;
+                }
+
+                fetch("https://dummyjson.com/auth/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    }),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data && data.id) {
+                            const userData = { username, password };
+                            document.cookie = `userCredentials=${encodeURIComponent(JSON.stringify(userData))}; max-age=${60 * 60 * 24}; path=/`;
+                            window.location.href = "/dashbaord.html";
+                        } else {
+                            document.getElementById("loginMessage").textContent = data.message || "Invalid username or password.";
+                        }
+                    })
+                    .catch(() => {
+                        document.getElementById("loginMessage").textContent = "Error Please Try Again";
+                    });
+                })
+            });
     </script>
 
 </body>

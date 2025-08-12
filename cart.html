@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
-                            <table class="table text-center">
+                            <table class="table text-center table-hover">
                                 <thead>
                                     <tr>
                                         <th>Image</th>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="row mt-5">
-                    <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="col-md-6 mb-4 mb-md-0 pt-3">
                         <div class="input-group mb-3 gap-3">
                             <input type="text" class="form-control" placeholder="Coupon Code">
                             <button class="btn btn-danger" type="button">Apply Coupon</button>
@@ -112,40 +112,12 @@
             if (cartItems.length === 0) {
                 cartTableBody.innerHTML = `
                 <tr>
-                    <td colspan="6" class="text-center">Your cart is empty <a href="./dashbaord.html" class="text-decoration-none text-dark">Continue shopping</a></td>
+                    <td colspan="6" class="text-center">Your cart is empty <a class="text-decoration-none text-dark" href="./dashbaord.html" class="text-decoration-none text-dark">Continue shopping</a></td>
                 </tr>
             `;
                 updateTotals(0);
                 return;
             }
-
-            let total = 0;
-            cartTableBody.innerHTML = cartItems.map((item, index) => {
-                const quantity = item.quantity || 1;
-                const subtotal = item.price * quantity;
-                total += subtotal;
-                return `
-                <tr class="text-center align-middle">
-                    <td>
-                        <img src="${item.image}" alt="${item.name}" width="80" height="100" class="me-3 img-thumbnail">
-                    </td>
-                    <td>${item.name}</td>
-                    <td>$${item.price}</td>
-                    <td>
-                        <input type="number" class="form-control-sm text-center quantity-input" 
-                            value="${quantity}" min="1" data-price="${item.price}">
-                    </td>
-                    <td class="item-subtotal">$${subtotal.toFixed(2)}</td>
-                    <td>
-                        <button class="btn btn-danger btn-sm remove-item" data-index="${index}">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-            }).join('');
-
-            updateTotals(total);
 
             cartTableBody.addEventListener('input', function (event) {
                 if (event.target.classList.contains('quantity-input')) {
@@ -161,9 +133,9 @@
             cartTableBody.addEventListener('click', function (event) {
                 if (event.target.closest('.remove-item')) {
                     const index = event.target.closest('.remove-item').getAttribute('data-index');
-                    cartItems.splice(index, 1); 
+                    cartItems.splice(index, 1);
                     localStorage.setItem('cart', JSON.stringify(cartItems));
-                    renderCart(); 
+                    renderCart();
                 }
             });
 
@@ -176,17 +148,17 @@
             }
 
             function updateTotals(total) {
-                cartSubtotal.textContent = `$${total.toFixed(2)}`;
-                cartTotal.textContent = `$${total.toFixed(2)}`;
+                cartSubtotal.textContent = `$${total.toLocaleString()}`;
+                cartTotal.textContent = `$${total.toLocaleString()}`;
             }
 
             function renderCart() {
                 if (cartItems.length === 0) {
                     cartTableBody.innerHTML = `
                     <tr>
-                        <td colspan="6" class="text-center">Your cart is empty. <a href="index.html">Continue shopping</a></td>
+                        <td colspan="6" class="text-center">Your cart is empty. <a href="index.html" class="text-dark text-decoration-none">Continue shopping</a></td>
                     </tr>
-                `;
+                 `;
                     updateTotals(0);
                     return;
                 }
@@ -197,29 +169,46 @@
                     const subtotal = item.price * quantity;
                     total += subtotal;
                     return `
-                    <tr class="text-center align-middle">
-                        <td>
-                            <img src="${item.image}" alt="${item.name}" width="80" height="100" class="me-3 img-thumbnail">
-                        </td>
-                        <td>${item.name}</td>
-                        <td>$${item.price}</td>
-                        <td>
-                            <input type="number" class="form-control-sm text-center quantity-input" 
-                                value="${quantity}" min="1" data-price="${item.price}">
-                        </td>
-                        <td class="item-subtotal">$${subtotal.toFixed(2)}</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm remove-item" data-index="${index}">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
+                        <tr class="text-center align-middle">
+                            <td>
+                                <img src="${item.image}" alt="image not found" width="80" height="80" width="auto" class="me-3">
+                            </td>
+                            <td>${item.name}</td>
+                            <td>$${item.price}</td>
+                            <td>
+                                <input type="number" class="form-control-sm text-center quantity-input" 
+                                    value="${quantity}" min="1" data-index="${index}">
+                            </td>
+                            <td class="item-subtotal">$${subtotal.toLocaleString()}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm remove-item" data-index="${index}">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                     `;
                 }).join('');
                 updateTotals(total);
-            }
 
-            renderCart(); 
+                cartTableBody.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('input', function () {
+                        const id = parseInt(this.getAttribute('data-index'));
+                        const newQuantity = parseInt(this.value) || 1;
+                        cartItems[id].quantity = newQuantity;
+                        localStorage.setItem('cart', JSON.stringify(cartItems));
+                        renderCart();
+                    });
+                });
+                cartTableBody.querySelectorAll('.remove-item').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const id = parseInt(this.getAttribute('data-index'));
+                        cartItems.splice(id, 1);
+                        localStorage.setItem('cart', JSON.stringify(cartItems));
+                        renderCart();
+                    });
+                });
+            }
+            renderCart();
         });
     </script>
 </body>
