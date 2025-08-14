@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive E-commerce | Cart</title>
+    <title>Exclusive E-commerce</title>
     <link rel="icon" type="image/x-icon" href="./public/assets/images/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="stylesheet" href="./public/assets/css/index.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -52,13 +53,14 @@
                         <a href="/" class="btn btn-outline-secondary">Return To Shop</a>
                     </div>
                     <div class="col-6 text-end">
-                        <button class="btn btn-outline-secondary">Update Cart</button>
+                        <button class="btn btn-success"><a href="./cart.html"
+                                style="text-decoration: none;color: white;">Update Cart</a></button>
                     </div>
                 </div>
 
                 <div class="row mt-5">
                     <div class="col-md-6 mb-4 mb-md-0 pt-3">
-                        <div class="input-group mb-3 gap-3">
+                        <div class="input-group mb-3 gap-3" id="coupon-input-group">
                             <input type="text" class="form-control" placeholder="Coupon Code">
                             <button class="btn btn-danger" type="button">Apply Coupon</button>
                         </div>
@@ -68,16 +70,21 @@
                             <div class="card-body border border-dark">
                                 <h5 class="card-title">Cart Total</h5>
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span>Subtotal:</span>
+                                    <span>Subtotal</span>
                                     <span id="cart-subtotal">$0</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span>Shipping:</span>
+                                    <span>Shipping</span>
                                     <span>Free</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2" id="coupon-discount-row"
+                                    style="display:none;">
+                                    <span>Coupon Discount (30%)</span>
+                                    <span id="coupon-discount-amount" class="text-success">-$0</span>
                                 </div>
                                 <hr>
                                 <div class="d-flex justify-content-between mb-3">
-                                    <span>Total:</span>
+                                    <span>Total</span>
                                     <span id="cart-total">$0</span>
                                 </div>
                                 <div class="d-flex justify-content-center">
@@ -91,126 +98,7 @@
         </section>
     </main>
     <div id="footer"></div>
-    <script>
-        fetch('./public/components/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-            });
-
-        fetch('./public/components/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            });
-        document.addEventListener('DOMContentLoaded', function () {
-            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-            const cartTableBody = document.getElementById('cart-tbody');
-            const cartSubtotal = document.getElementById('cart-subtotal');
-            const cartTotal = document.getElementById('cart-total');
-
-            if (cartItems.length === 0) {
-                cartTableBody.innerHTML = `
-                <tr>
-                    <td colspan="6" class="text-center">Your cart is empty <a class="text-decoration-none text-dark" href="./dashbaord.html" class="text-decoration-none text-dark">Continue shopping</a></td>
-                </tr>
-            `;
-                updateTotals(0);
-                return;
-            }
-
-            cartTableBody.addEventListener('input', function (event) {
-                if (event.target.classList.contains('quantity-input')) {
-                    const row = event.target.closest('tr');
-                    const price = parseFloat(event.target.getAttribute('data-price'));
-                    const quantity = parseInt(event.target.value) || 1;
-                    const subtotal = price * quantity;
-                    row.querySelector('.item-subtotal').textContent = `$${subtotal.toFixed(2)}`;
-                    calculateCartTotal();
-                }
-            });
-
-            cartTableBody.addEventListener('click', function (event) {
-                if (event.target.closest('.remove-item')) {
-                    const index = event.target.closest('.remove-item').getAttribute('data-index');
-                    cartItems.splice(index, 1);
-                    localStorage.setItem('cart', JSON.stringify(cartItems));
-                    renderCart();
-                }
-            });
-
-            function calculateCartTotal() {
-                let total = 0;
-                document.querySelectorAll('.item-subtotal').forEach(element => {
-                    total += parseFloat(element.textContent.replace('$', ''));
-                });
-                updateTotals(total);
-            }
-
-            function updateTotals(total) {
-                cartSubtotal.textContent = `$${total.toLocaleString()}`;
-                cartTotal.textContent = `$${total.toLocaleString()}`;
-            }
-
-            function renderCart() {
-                if (cartItems.length === 0) {
-                    cartTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="6" class="text-center">Your cart is empty. <a href="index.html" class="text-dark text-decoration-none">Continue shopping</a></td>
-                    </tr>
-                 `;
-                    updateTotals(0);
-                    return;
-                }
-
-                let total = 0;
-                cartTableBody.innerHTML = cartItems.map((item, index) => {
-                    const quantity = item.quantity || 1;
-                    const subtotal = item.price * quantity;
-                    total += subtotal;
-                    return `
-                        <tr class="text-center align-middle">
-                            <td>
-                                <img src="${item.image}" alt="image not found" width="80" height="80" width="auto" class="me-3">
-                            </td>
-                            <td>${item.name}</td>
-                            <td>$${item.price}</td>
-                            <td>
-                                <input type="number" class="form-control-sm text-center quantity-input" 
-                                    value="${quantity}" min="1" data-index="${index}">
-                            </td>
-                            <td class="item-subtotal">$${subtotal.toLocaleString()}</td>
-                            <td>
-                                <button class="btn btn-danger btn-sm remove-item" data-index="${index}">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                     `;
-                }).join('');
-                updateTotals(total);
-
-                cartTableBody.querySelectorAll('.quantity-input').forEach(input => {
-                    input.addEventListener('input', function () {
-                        const id = parseInt(this.getAttribute('data-index'));
-                        const newQuantity = parseInt(this.value) || 1;
-                        cartItems[id].quantity = newQuantity;
-                        localStorage.setItem('cart', JSON.stringify(cartItems));
-                        renderCart();
-                    });
-                });
-                cartTableBody.querySelectorAll('.remove-item').forEach(btn => {
-                    btn.addEventListener('click', function () {
-                        const id = parseInt(this.getAttribute('data-index'));
-                        cartItems.splice(id, 1);
-                        localStorage.setItem('cart', JSON.stringify(cartItems));
-                        renderCart();
-                    });
-                });
-            }
-            renderCart();
-        });
-    </script>
+    <script src="./public/assets/js/cart.js"></script>
 </body>
 
 </html>

@@ -11,73 +11,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="stylesheet" href="./public/assets/css/index.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
     <div id="header"></div>
     <main class="main_details">
-        <h1 class="text-center my-4">Your Wishlist</h1>
+        <div class="container d-flex justify-content-between align-items-center my-4">
+            <h3 class="mb-0">Wishlist <span id="wishlist-count-heading"></span></h3>
+
+            <div class="d-flex gap-2">
+                <button id="move-all-to-bag" class="btn btn-outline-secondary">
+                    Move All To Bag
+                </button>
+                <a href="./wishlist.html" class="btn btn-outline-secondary">
+                    <i class="fa fa-sync-alt me-1"></i>
+                </a>
+            </div>
+        </div>
+
         <div id="wishlist-items" class="container mb-3">
+        </div>
+        <div class="container my-5">
+            <div class="mb-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <div class="bg-danger rounded-1 me-2" style="width:22px; height:32px;"></div>
+                    <h3 class="fw-semibold mb-0">Just For You</h3>
+                </div>
+                <a href="./dashbaord.html" class="btn btn-outline-secondary ">View All</a>
+            </div>
+            <div id="just-for-you" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3"></div>
         </div>
     </main>
     <div id="footer"></div>
 
-    <script>
-        fetch('./public/components/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-            });
-
-        fetch('./public/components/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const wishlistContainer = document.getElementById('wishlist-items');
-
-            function renderWishlist() {
-                const wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
-                if (wishlistItems.length === 0) {
-                    wishlistContainer.innerHTML = `
-                <p class="text-center">Your wishlist is empty <a class="text-dark text-decoration-none" href="./dashbaord.html">Continue shopping</a></p>
-            `;
-                    return;
-                }
-                wishlistContainer.innerHTML = `
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-                ${wishlistItems.map(item => `
-                    <div class="col">
-                        <div class="card border-0 position-relative h-100">
-                            <img src="${item.image || './public/assets/images/default-product.png'}" class="card-img-top p-5 bg-light"
-                                style="height:240px; object-fit:contain;" alt="${item.name}">
-                            <div class="card-body pt-2 px-2 d-flex flex-column align-items-start">
-                                <div class="fw-bold mb-1" style="font-size:1.05rem;">${item.name}</div>
-                                <div class="text-danger fw-bold mb-2" style="font-size:1.05rem;">$${item.price}</div>
-                                <button class="btn btn-outline-danger btn-sm remove-wishlist-item" data-id="${item.id}">
-                                    Remove
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>`
-            }
-            renderWishlist();
-
-            wishlistContainer.addEventListener('click', function (event) {
-                if (event.target.classList.contains('remove-wishlist-item')) {
-                    const id = event.target.getAttribute('data-id');
-                    let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
-                    wishlistItems = wishlistItems.filter(item => String(item.id) !== String(id));
-                    localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
-                    renderWishlist();
-                }
-            });
-        });
-    </script>
+    <script src="./public/assets/js/wishlist.js"></script>
 </body>
 
 </html>
