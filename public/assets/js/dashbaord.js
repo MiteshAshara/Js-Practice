@@ -67,6 +67,8 @@ fetch('./products.json')
                 </div>
             </div>
             `).join('');
+        
+        view_products = products;
     });
 
 $(document).on('click', '.wishlist-btn', function () {
@@ -114,4 +116,48 @@ $(document).on('click', '.add-to-cart-btn', function () {
     }
 });
 
-if (!document.cookie.includes("userCredentials=")) location.href = "/";
+function viewProduct() {
+    if (!document.getElementById('productDetailModal')) {
+        $('body').append(`
+            <div class="modal fade" id="productDetailModal" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="productDetailModalLabel">Product Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body" id="productModel">
+                  </div>
+                </div>
+              </div>
+            </div>
+        `);
+    }
+}
+
+$(document).on('click', '.fa-eye', function () {
+    viewProduct();
+    var $card = $(this).closest('.card');
+    var id = $card.data('id');
+    var product = (view_products || []).find(p => p.id == id);
+    if (!product) return;
+
+    var html = `
+        <div class="text-center">
+            <img src="${product.image}" alt="${product.name}" style="max-width:180px;max-height:180px;" class="mb-3"/>
+            <h5>${product.name}</h5>
+            <div class="mb-2 text-danger fw-bold">$${product.price}</div>
+            <div class="mb-2">${product.description || ''}</div>
+            <div>
+                <span class="me-2">Rating:</span>
+                ${'<i class="fa fa-star text-warning"></i>'.repeat(Math.floor(product.rating))}
+                ${(product.rating % 1 !== 0) ? '<i class="fa fa-star-half-alt text-warning"></i>' : ''}
+                ${'<i class="fa fa-star" style="color:#BFBFBF"></i>'.repeat(5 - Math.ceil(product.rating))}
+                <span class="ms-1">(${product.reviews})</span>
+            </div>
+        </div>
+    `;
+    $('#productModel').html(html);
+    var modal = new bootstrap.Modal(document.getElementById('productDetailModal'));
+    modal.show();
+});

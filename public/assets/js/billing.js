@@ -155,5 +155,3 @@ placeOrderBtn.addEventListener('click', function (e) {
         return;
     }
 });
-
-if (!document.cookie.includes("userCredentials=")) location.href = "/";

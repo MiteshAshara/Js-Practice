@@ -130,11 +130,19 @@ function renderJustForYou(products) {
                                 <span class="ms-2 text-muted">(${item.reviews} reviews)</span>
                             </div>
                         </div>
-                 `;
+            `;
         }
         return `
                     <div class="col">
                         <div class="card border-0 h-100 product-card-hover position-relative">
+                            <div class="position-absolute top-0 end-0 mt-2 me-2 d-flex flex-column card-action-hover" style="z-index:2;">
+                                <button class="btn p-0 mb-2 bg-white rounded-circle wishlist-btn" style="width:36px; height:36px;" data-id="${item.id}">
+                                    <i class="fa-regular fa-heart"></i>
+                                </button>
+                                <button class="btn p-0 bg-white rounded-circle view-details-btn" style="width:36px; height:36px;" data-id="${item.id}">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
                             <img src="${item.image || './public/assets/images/default-product.png'}" class="card-img-top p-4 bg-light" style="height:180px; object-fit:contain;" alt="${item.name}">
                             <div class="card-body pt-2 px-2 d-flex flex-column align-items-start">
                                 <div class="fw-bold mb-1" style="font-size:1.05rem;">${item.name}</div>
@@ -195,5 +203,3 @@ fetch('./products.json')
     .catch(() => {
         document.getElementById('just-for-you').innerHTML = '<div class="col"><p>Could not load products.</p></div>';
     });
-
-if (!document.cookie.includes("userCredentials=")) location.href = "/";

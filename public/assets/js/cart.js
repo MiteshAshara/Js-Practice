@@ -197,5 +197,3 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     renderCart();
 });
-
-if (!document.cookie.includes("userCredentials=")) location.href = "/";

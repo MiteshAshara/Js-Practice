@@ -32,19 +32,22 @@
                 </form>
                 <div class="d-flex align-items-center ms-lg-3 mt-2 mt-lg-0">
                     <a href="/wishlist.html" class="btn btn-link text-dark fs-4 me-2 position-relative" title="Wishlist"
-                        id="wishlist-link">
+                        id="wishlist-link"
+                        onclick="if(!document.cookie.includes('userCredentials=')){location.href='/';return false;}">
                         <i class="fa fa-heart"></i>
                         <span id="wishlist-count" class="position-absolute top-0 start-100 translate-middle"
                             style="font-size:0.75rem; min-width:28px; background-color:red; color:white; border-radius:6px;">
                         </span>
                     </a>
-                    <a href="/cart.html" class="btn btn-link text-dark fs-4 position-relative" title="Cart">
+                    <a href="/cart.html" class="btn btn-link text-dark fs-4 position-relative" title="Cart"
+                        onclick="if(!document.cookie.includes('userCredentials=')){location.href='/';return false;}">
                         <i class="fa fa-shopping-cart"></i>
                         <span id="cart-count" class="position-absolute top-0 start-100 translate-middle"
                             style="font-size:0.75rem; min-width:28px; background-color:red; color:white; border-radius:6px;">
                         </span>
                     </a>
-                    <a href="/profile.html" class="btn btn-link text-dark fs-4" title="User">
+                    <a href="/profile.html" class="btn btn-link text-dark fs-4" title="User"
+                        onclick="if(!document.cookie.includes('userCredentials=')){location.href='/';return false;}">
                         <i class="fa fa-user"></i>
                     </a>
                 </div>

@@ -116,5 +116,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-if (!document.cookie.includes("userCredentials=")) location.href = "/";

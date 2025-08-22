@@ -55,26 +55,31 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch("https://dummyjson.com/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            }),
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.id) {
-                    const userData = { username, password };
-                    document.cookie = `userCredentials=${encodeURIComponent(JSON.stringify(userData))}; max-age=${60 * 60 * 24}; path=/`;
-                    window.location.href = "/dashbaord.html";
-                } else {
-                    document.getElementById("loginMessage").textContent = data.message || "Invalid username or password.";
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://dummyjson.com/auth/login");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState  === XMLHttpRequest.DONE) {
+                try {
+                    const data = JSON.parse(xhr.responseText);
+                    if (xhr.status === 200 && data && data.id) {
+                        const userData = { username, password };
+                        document.cookie = `userCredentials=${encodeURIComponent(JSON.stringify(userData))}; max-age=${60 * 60 * 24}; path=/`;
+                        window.location.href = "/dashbaord.html";
+                    } else {
+                        document.getElementById("loginMessage").textContent = data.message || "Invalid username or password.";
+                    }
+                } catch {
+                    document.getElementById("loginMessage").textContent = "Error Please Try Again";
                 }
-            })
-            .catch(() => {
-                document.getElementById("loginMessage").textContent = "Error Please Try Again";
-            });
+            }
+        };
+        xhr.onerror = function () {
+            document.getElementById("loginMessage").textContent = "Error Please Try Again";
+        };
+        xhr.send(JSON.stringify({
+            username: username,
+            password: password,
+        }));
     });
 });
