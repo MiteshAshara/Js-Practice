@@ -41,7 +41,9 @@ function getCouponCode() {
     if (match) {
         try {
             return ((JSON.parse(decodeURIComponent(match[1])).username || "USER").toUpperCase()) + "DEVIT" + mon + "202526";
-        } catch { }
+        } catch { 
+            return "USERDEVIT" + mon + "202526";
+        }
     }
 
     return "USERDEVIT" + mon + "202526";
@@ -126,6 +128,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 couponBtn.textContent = "Applied";
                 couponBtn.classList.remove("btn-danger");
                 couponBtn.classList.add("btn-success");
+                if (couponInputGroup) {
+                    couponInputGroup.innerHTML = `<input type="text" class="form-control bg-light" value="${expectedCoupon}" readonly>
+                    <button class="btn btn-outline-danger" type="button" id="remove-coupon-btn">Remove Coupon</button>`;
+                    document.getElementById('remove-coupon-btn').onclick = function () {
+                        localStorage.removeItem('couponState');
+                        window.location.reload();
+                    };
+                }
             } else {
                 alert("Your Coupon code is: " + expectedCoupon);
             }

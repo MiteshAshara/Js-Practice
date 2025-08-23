@@ -9,8 +9,8 @@ fetch('./public/components/header.html')
             var cart = JSON.parse(localStorage.getItem('cart') || '[]');
             var w = document.getElementById('wishlist-count');
             var c = document.getElementById('cart-count');
-            if (w) w.textContent = wishlist.length;
-            if (c) c.textContent = cart.length;
+            if (w) w.textContent = wishlist.length || "0";
+            if (c) c.textContent = cart.length || "0";
         }
     });
 
@@ -71,6 +71,11 @@ document.addEventListener('DOMContentLoaded', function () {
             wishlistItems = wishlistItems.filter(item => String(item.id) !== String(id));
             localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
             renderWishlist();
+            if (typeof updateCounts === 'function') updateCounts();
+            else {
+                var w = document.getElementById('wishlist-count');
+                if (w) w.textContent = wishlistItems.length || "0";
+            }
         }
         if (event.target.classList.contains('add-to-cart-wishlist')) {
             const btn = event.target;
@@ -90,6 +95,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     btn.classList.remove('btn-success');
                     btn.classList.add('btn-dark');
                 }, 1000);
+                if (typeof updateCounts === 'function') updateCounts();
+                else {
+                    var c = document.getElementById('cart-count');
+                    if (c) c.textContent = cart.length || "0";
+                }
             }
         }
     });
@@ -108,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <p class="text-center">Your wishlist is empty <a class="text-dark text-decoration-none" href="./dashbaord.html">Continue shopping</a></p>
             `;
         updateWishlistCountHeading();
+        if (typeof updateCounts === 'function') updateCounts();
     });
 
     renderWishlist();
@@ -130,15 +141,12 @@ function renderJustForYou(products) {
                                 <span class="ms-2 text-muted">(${item.reviews} reviews)</span>
                             </div>
                         </div>
-            `;
-        }
+                    `;
+            }
         return `
                     <div class="col">
                         <div class="card border-0 h-100 product-card-hover position-relative">
                             <div class="position-absolute top-0 end-0 mt-2 me-2 d-flex flex-column card-action-hover" style="z-index:2;">
-                                <button class="btn p-0 mb-2 bg-white rounded-circle wishlist-btn" style="width:36px; height:36px;" data-id="${item.id}">
-                                    <i class="fa-regular fa-heart"></i>
-                                </button>
                                 <button class="btn p-0 bg-white rounded-circle view-details-btn" style="width:36px; height:36px;" data-id="${item.id}">
                                     <i class="fa-regular fa-eye"></i>
                                 </button>
@@ -162,6 +170,24 @@ function renderJustForYou(products) {
                     </div>
                  `;
     }).join('');
+}
+
+function viewModal() {
+    if (!document.getElementById('viewProductModal')) {
+        $('body').append(`
+            <div class="modal fade" id="viewProductModal" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Product Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body" id="viewModalBody"></div>
+                </div>
+              </div>
+            </div>
+        `);
+    }
 }
 
 fetch('./products.json')
@@ -195,7 +221,37 @@ fetch('./products.json')
                             btn.classList.remove('btn-success');
                             btn.classList.add('btn-dark');
                         }, 1000);
+                        if (typeof updateCounts === 'function') updateCounts();
+                        else {
+                            var c = document.getElementById('cart-count');
+                            if (c) c.textContent = cart.length || "0";
+                        }
                     }
+                }
+                if (event.target.classList.contains('view-details-btn') || event.target.closest('.view-details-btn')) {
+                    const btn = event.target.closest('.view-details-btn');
+                    const id = btn.getAttribute('data-id');
+                    const product = data.find(p => String(p.id) === String(id));
+                    if (!product) return;
+                    viewModal();
+                    const html = `
+                        <div class="text-center">
+                            <img src="${product.image}" alt="${product.name}" style="max-width:180px;max-height:180px;" class="mb-3"/>
+                            <h5>${product.name}</h5>
+                            <div class="mb-2 text-danger fw-bold">$${product.price}</div>
+                            <div class="mb-2">${product.description || ''}</div>
+                            <div>
+                                <span class="me-2">Rating:</span>
+                                ${'<i class="fa fa-star text-warning"></i>'.repeat(Math.floor(product.rating))}
+                                ${(product.rating % 1 !== 0) ? '<i class="fa fa-star-half-alt text-warning"></i>' : ''}
+                                ${'<i class="fa fa-star" style="color:#BFBFBF"></i>'.repeat(5 - Math.ceil(product.rating))}
+                                <span class="ms-1">(${product.reviews})</span>
+                            </div>
+                        </div>
+                    `;
+                    $('#viewModalBody').html(html);
+                    var modal = new bootstrap.Modal(document.getElementById('viewProductModal'));
+                    modal.show();
                 }
             });
         }

@@ -88,7 +88,7 @@ $(document).on('click', '.wishlist-btn', function () {
     $icon.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
 
     if ($('#wishlist-count').length) {
-        $('#wishlist-count').text(wishlist.length);
+        $('#wishlist-count').text(wishlist.length || "0");
     }
 });
 
@@ -113,6 +113,10 @@ $(document).on('click', '.add-to-cart-btn', function () {
         setTimeout(function () {
             $btn.text("Add To Cart").removeClass('btn-success').addClass('btn-dark');
         }, 1000);
+
+        if ($('#cart-count').length) {
+            $('#cart-count').text(cart.length || "0");
+        }
     }
 });
 

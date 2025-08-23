@@ -55,6 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
         couponDiscount = couponState.discount || 0;
     }
 
+    if (couponState && couponState.code && couponInput) {
+        couponInput.value = couponState.code;
+    }
+
     function getCouponCode() {
         const match = document.cookie.match(/userCredentials=([^;]+)/);
         const monthAbbr = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -70,19 +74,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateTotals(total) {
-        cartSubtotal.textContent = `$${total.toLocaleString()}`;
-        if (couponApplied) {
-            if (!couponDiscount) {
-                couponDiscount = Math.round(total * 0.3);
-                localStorage.setItem('couponState', JSON.stringify({ applied: true, discount: couponDiscount }));
-            }
+        let discount = 0;
+
+        if (couponApplied && couponState && couponState.code) {
+            discount = Math.round(total * 0.3);
+            couponDiscount = discount;
+            localStorage.setItem('couponState', JSON.stringify({ applied: true, discount: couponDiscount, code: couponState.code }));
             couponDiscountRow.style.display = "";
-            couponDiscountAmount.textContent = "-$" + couponDiscount.toLocaleString();
-            cartTotal.textContent = "$" + (total - couponDiscount).toLocaleString();
+            couponDiscountAmount.textContent = "-$" + discount.toLocaleString();
+            cartTotal.textContent = "$" + (total - discount).toLocaleString();
         } else {
             couponDiscountRow.style.display = "none";
             cartTotal.textContent = `$${total.toLocaleString()}`;
         }
+        cartSubtotal.textContent = `$${total.toLocaleString()}`;
     }
 
     function renderCart() {
@@ -138,6 +143,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 cartItems.splice(id, 1);
                 localStorage.setItem('cart', JSON.stringify(cartItems));
                 renderCart();
+                if (typeof updateCounts === 'function') updateCounts();
+                else {
+                    var c = document.getElementById('cart-count');
+                    if (c) c.textContent = cartItems.length || "0";
+                }
             });
         });
     }
@@ -145,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (couponApplied && couponState.code) {
         if (couponInputGroup) {
             couponInputGroup.innerHTML = `<input type="text" class="form-control bg-light" value="${couponState.code}" readonly>
-                    <button class="btn btn-outline-danger" type="button" id="remove-coupon-btn">Remove Coupon</button>`;
+                <button class="btn btn-outline-danger" type="button" id="remove-coupon-btn">Remove Coupon</button>`;
             document.getElementById('remove-coupon-btn').onclick = function () {
                 localStorage.removeItem('couponState');
                 window.location.reload();
@@ -177,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 couponBtn.classList.add("btn-success");
                 if (couponInputGroup) {
                     couponInputGroup.innerHTML = `<input type="text" class="form-control bg-light" value="${expectedCoupon}" readonly>
-                            <button class="btn btn-outline-danger" type="button" id="remove-coupon-btn">Remove Coupon</button>`;
+                        <button class="btn btn-outline-danger" type="button" id="remove-coupon-btn">Remove Coupon</button>`;
                     document.getElementById('remove-coupon-btn').onclick = function () {
                         localStorage.removeItem('couponState');
                         window.location.reload();

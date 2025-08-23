@@ -35,13 +35,14 @@
 
             </div>
 
-            <div class="col-md-2 mb-4">
+            <div class="col-md-2 mb-4"
+                onclick="if(!document.cookie.includes('userCredentials=')){location.href='/';return false;}">
                 <div class="fw-bold fs-5 mb-2">Account</div>
-                <a href="#" class="text-white text-decoration-none d-block mb-1">My Account</a>
-                <a href="#" class="text-white text-decoration-none d-block mb-1">Login / Register</a>
-                <a href="#" class="text-white text-decoration-none d-block mb-1">Cart</a>
-                <a href="#" class="text-white text-decoration-none d-block mb-1">Wishlist</a>
-                <a href="#" class="text-white text-decoration-none d-block mb-1">Shop</a>
+                <a href="/cart.html" class="text-white text-decoration-none d-block mb-1">My Account</a>
+                <a href="/index.html" class="text-white text-decoration-none d-block mb-1">Login / Register</a>
+                <a href="/cart.html" class="text-white text-decoration-none d-block mb-1">Cart</a>
+                <a href="/wishlist.html" class="text-white text-decoration-none d-block mb-1">Wishlist</a>
+                <a href="/dashbaord.html" class="text-white text-decoration-none d-block mb-1">Shop</a>
             </div>
 
             <div class="col-md-2 mb-4">
@@ -59,11 +60,10 @@
                     <img src="/public/assets/images/Qrcode 1.png" alt="image not found" class="me-2"
                         style="width:80px; height:80px;">
                     <div class="col-md-6 d-flex d-md-inline-grid flex-column mb-2 gap-2">
-                        <a href="#"><img
-                                src="/public/assets/images/png-transparent-google-play-store-logo-google-play-app-store-android-wallets-text-label-logo.png"
-                                alt="Google Play" class="img-fluid mb-1" style="width:110px;"></a>
-                        <a href="#"><img src="/public/assets/images/download-appstore.png" alt="App Store"
-                                class="img-fluid" style="width:110px;"></a>
+                        <img src="/public/assets/images/png-transparent-google-play-store-logo-google-play-app-store-android-wallets-text-label-logo.png"
+                            alt="Google Play" class="img-fluid mb-1" style="width:110px;">
+                        <img src="/public/assets/images/download-appstore.png" alt="App Store" class="img-fluid"
+                            style="width:110px;">
                     </div>
                 </div>
                 <div class="mt-2">

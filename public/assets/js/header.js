@@ -13,6 +13,10 @@ function checkLoginStatus() {
     userIcon.style = isLoggedIn ? 'border: 2px solid black;padding: 3px;' : '';
 }
 
+window.addEventListener('storage', function (e) {
+    if (e.key === 'wishlist' || e.key === 'cart') updateCounts();
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     updateCounts();
     checkLoginStatus();
